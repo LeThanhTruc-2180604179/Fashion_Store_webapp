@@ -27,7 +27,7 @@ import './styles/globals.css';
 
 function App() {
   return (
-    <Router basename="/Fashion_Store_webapp">
+    <Router>
       <AuthProvider>
         <CartProvider>
           <ProductProvider>
@@ -54,10 +54,10 @@ function App() {
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </main>
-              <Footer />
               <WelcomeNotification />
               <ChatWidget />
             </div>
+            <Footer />
           </ProductProvider>
         </CartProvider>
       </AuthProvider>

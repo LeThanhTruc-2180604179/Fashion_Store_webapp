@@ -224,13 +224,13 @@ const HomePage = () => {
         <ProductList products={saleProducts} loading={loading} showSaleBadge={true} />
       </section>
 
-      {/* Blog/News Section */}
-      <section data-aos="fade-up" className="mb-16 bg-gray-50 py-12">
-        <h2 className="text-2xl font-bold text-center mb-4">Our Blog</h2>
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-1 bg-black rounded-full" />
+      {/* Blog Section */}
+      <section data-aos="fade-up" className="mt-12 mb-12">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-800">Our Blog</h2>
+          <p className="text-gray-500">Tin tức mới nhất từ chúng tôi</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.map((post, i) => (
             <div key={i} className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
               <img src={post.image} alt={post.title} className="rounded-lg mb-4 w-full h-48 object-cover" />
@@ -244,7 +244,7 @@ const HomePage = () => {
       </section>
 
       {/* Contact/Map Section */}
-      <section data-aos="fade-up" className="mb-8">
+      <section data-aos="fade-up" className="mt-12 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto items-center bg-white rounded-2xl shadow p-6">
           <div className="w-full h-80 rounded-xl overflow-hidden">
             <iframe

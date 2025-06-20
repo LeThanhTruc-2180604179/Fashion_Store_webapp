@@ -109,7 +109,7 @@ const AdminChatPage = () => {
                   </span>
                 )}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <div className="font-semibold text-gray-800 text-sm truncate">{c.email || c.clientId}</div>
                 <div className="text-xs text-gray-500 truncate">{c.lastMsg}</div>
               </div>
