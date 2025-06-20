@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Global Styles */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #dc2626;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #2563eb;
+    --secondary-color: #dc2626;
+  }
+}
+
+body {
+  @apply bg-gray-50 text-gray-900;
+  font-family: 'Inter', sans-serif;
+}
+
+.dark body {
+  background-color: #18181b;
+  color: #f3f4f6;
+}
+
+.main-content {
+  @apply min-h-screen;
+}
+
+.dark .main-content {
+  background-color: #18181b;
+  color: #f3f4f6;
+}
+
+.container {
+  @apply max-w-7xl;
+}
+
+.dark .container {
+  background-color: transparent;
+}
+
+/* Custom Button Styles */
+.btn-primary {
+  @apply bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-colors;
+}
+
+/* Custom Card Styles */
+.card {
+  @apply bg-white rounded-2xl shadow-lg overflow-hidden;
+}
+
+.dark .bg-white {
+  background-color: #23232a !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #23232a !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: #23232a !important;
+}
+
+.dark .bg-gray-200 {
+  background-color: #23232a !important;
+}
+
+.dark .bg-gray-300 {
+  background-color: #23232a !important;
+}
+
+.dark .text-gray-900, .dark .text-gray-800 {
+  color: #f3f4f6 !important;
+}
+
+.dark .text-gray-700, .dark .text-gray-600, .dark .text-gray-500 {
+  color: #d1d5db !important;
+}
+
+.dark .border-gray-200, .dark .border-gray-300, .dark .border-gray-400 {
+  border-color: #33334d !important;
+}
+
+.dark .rounded-2xl, .dark .rounded-lg, .dark .rounded {
+  background-clip: padding-box;
+}
+
+.dark .shadow-lg, .dark .shadow-md {
+  box-shadow: 0 2px 8px 0 #0006;
+}
+
+.dark input, .dark select, .dark textarea {
+  background-color: #23232a !important;
+  color: #f3f4f6 !important;
+  border-color: #33334d !important;
+}
+
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #a1a1aa !important;
+}
+
+.dark .bg-blue-600 {
+  background-color: #2563eb !important;
+}
+
+.dark .bg-blue-50 {
+  background-color: #1e293b !important;
+}
+
+.dark .hover\:bg-blue-100:hover {
+  background-color: #334155 !important;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #23232a !important;
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: #23232a !important;
+}
+
+.dark .hover\:bg-blue-700:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.dark .hover\:bg-red-50:hover {
+  background-color: #3f1d1d !important;
+}
+
+.dark .bg-red-100 {
+  background-color: #3f1d1d !important;
+}
+
+.dark .bg-green-100 {
+  background-color: #1d3f1d !important;
+}
+
+.dark .bg-yellow-100 {
+  background-color: #3f3f1d !important;
+}
+
+.dark .bg-purple-100 {
+  background-color: #2d1d3f !important;
+}
+
+.dark .bg-blue-100 {
+  background-color: #1e293b !important;
+}
+
+.dark .bg-blue-400 {
+  background-color: #2563eb !important;
+}
+
+.dark .bg-blue-500 {
+  background-color: #2563eb !important;
+}
+
+.dark .bg-blue-700 {
+  background-color: #1d4ed8 !important;
+}
+
+.dark .bg-red-500 {
+  background-color: #dc2626 !important;
+}
+
+.dark .bg-gray-900 {
+  background-color: #18181b !important;
+}
+
+.dark .text-blue-600 {
+  color: #60a5fa !important;
+}
+
+.dark .text-blue-700 {
+  color: #3b82f6 !important;
+}
+
+.dark .text-blue-400 {
+  color: #60a5fa !important;
+}
+
+.dark .text-blue-500 {
+  color: #3b82f6 !important;
+}
+
+.dark .text-red-600 {
+  color: #f87171 !important;
+}
+
+.dark .text-green-600 {
+  color: #4ade80 !important;
+}
+
+.dark .text-yellow-600 {
+  color: #fde68a !important;
+}
+
+.dark .text-purple-600 {
+  color: #a78bfa !important;
+}
+
+.dark .text-gray-400 {
+  color: #a1a1aa !important;
+}
+
+.dark .border-black {
+  border-color: #33334d !important;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive Image */
+img {
+  @apply max-w-full h-auto;
+}
