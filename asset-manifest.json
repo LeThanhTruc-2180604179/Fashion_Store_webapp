@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.e3141a6b.css",
-    "main.js": "/static/js/main.d0c939bd.js",
-    "static/js/453.f262bf0d.chunk.js": "/static/js/453.f262bf0d.chunk.js",
-    "index.html": "/index.html",
-    "main.e3141a6b.css.map": "/static/css/main.e3141a6b.css.map",
-    "main.d0c939bd.js.map": "/static/js/main.d0c939bd.js.map",
-    "453.f262bf0d.chunk.js.map": "/static/js/453.f262bf0d.chunk.js.map"
+    "main.css": "/Fashion_Store_webapp/static/css/main.e3141a6b.css",
+    "main.js": "/Fashion_Store_webapp/static/js/main.db488f74.js",
+    "static/js/453.f262bf0d.chunk.js": "/Fashion_Store_webapp/static/js/453.f262bf0d.chunk.js",
+    "index.html": "/Fashion_Store_webapp/index.html",
+    "main.e3141a6b.css.map": "/Fashion_Store_webapp/static/css/main.e3141a6b.css.map",
+    "main.db488f74.js.map": "/Fashion_Store_webapp/static/js/main.db488f74.js.map",
+    "453.f262bf0d.chunk.js.map": "/Fashion_Store_webapp/static/js/453.f262bf0d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e3141a6b.css",
-    "static/js/main.d0c939bd.js"
+    "static/js/main.db488f74.js"
   ]
 }
