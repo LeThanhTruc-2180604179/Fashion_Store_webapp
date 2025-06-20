@@ -27,7 +27,7 @@ import './styles/globals.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Fashion_Store_webapp">
       <AuthProvider>
         <CartProvider>
           <ProductProvider>
