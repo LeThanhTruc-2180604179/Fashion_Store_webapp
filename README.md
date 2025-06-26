@@ -1,9 +1,8 @@
-# ClothingStore - Web Bán Quần Áo
+# TESTER LƯU Ý ĐỌC KĨ README GIÚP MÌNH ĐẶC BIỆT LÀ MỤC ## 3 TÀI KHOẢN ADMIN VÀ CHỨC NĂNG MÃ GIẢM GIÁ NHÉ. 
 
 ## 1. Giới thiệu
 ClothingStore là webapp bán hàng thời trang hiện đại, hỗ trợ đầy đủ các chức năng mua sắm, quản lý đơn hàng, quản lý sản phẩm, chat hỗ trợ khách hàng, thông báo, mã giảm giá, v.v. Giao diện đẹp, dễ sử dụng, tối ưu cho cả desktop và mobile.
 
----
 
 ## 2. Hướng dẫn cài đặt & chạy project
 
@@ -22,21 +21,17 @@ npm start
 ```
 Truy cập: http://localhost:3000
 
-### Build production
-```bash
-npm run build
-```
 
----
 
-## 3. Tài khoản mẫu (Admin)
-- **Email:** Admin@gmail.com
-- **Mật khẩu:** Aa123456@
+-------------------------------------------------------LƯU Ý----------------------------------------------------------
+## 3. Tài khoản có sẵn (Admin)
+
+- **Email: Admin@gmail.com
+- **Mật khẩu: Aa123456@
 
 > Đăng nhập bằng tài khoản trên để truy cập Dashboard Admin và các chức năng quản trị.
 
----
-
+-----------------------------------------------------------------------------------------------------------------
 ## 4. Danh sách chức năng & hướng dẫn sử dụng
 
 ### 4.1. Chức năng cho khách hàng
@@ -105,25 +100,13 @@ npm run build
 #### Quản lý thông báo
 - Nhận thông báo khi có đơn hàng mới, cập nhật trạng thái đơn, phản hồi chat, v.v.
 
-#### Quản lý tài khoản admin
-- Đổi mật khẩu, cập nhật thông tin admin.
 
----
 
 ## 5. Một số lưu ý
-- Dữ liệu người dùng, đơn hàng, sản phẩm, thông báo, chat... được lưu localStorage (demo).
 - Mỗi người dùng có thông báo, đơn hàng, wishlist, mã giảm giá riêng.
 - Admin không thể đặt hàng, không có wishlist/giỏ hàng.
-- Popup chào mừng chỉ hiện 1 lần cho mỗi user.
 
----
 
-## 6. Liên hệ & hỗ trợ
-- Email: support@clothingstore.com
-- Địa chỉ: 123 Đường Thời Trang, TP.HCM
-- Hotline: (+84) 123 456 789
-
----
 
 ## 7. Công nghệ sử dụng
 - ReactJS, React Router, Context API
@@ -132,5 +115,3 @@ npm run build
 
 ---
 
-## 8. Đóng góp & phát triển
-Mọi ý kiến đóng góp, báo lỗi hoặc đề xuất tính năng mới vui lòng gửi về email hỗ trợ hoặc tạo issue trên repository.

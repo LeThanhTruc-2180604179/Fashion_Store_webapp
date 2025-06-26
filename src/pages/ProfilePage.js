@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle, Lock } from 'lucide-react';
+import { CheckCircle, Lock, Eye, EyeOff } from 'lucide-react';
 import DiscountCodesPage from './DiscountCodesPage';
 
 const ProfilePage = () => {
@@ -26,6 +26,13 @@ const ProfilePage = () => {
     newPassword: '',
     confirmPassword: '',
   });
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+  const [showPassword, setShowPassword] = useState({
+    old: false,
+    new: false,
+    confirm: false,
+  });
+  const [fieldErrors, setFieldErrors] = useState({});
 
   // Thêm danh sách quốc gia và thành phố
   const VIETNAM_CITIES = [
@@ -70,6 +77,7 @@ const ProfilePage = () => {
 
   const handlePasswordChange = (e) => {
     setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
+    setFieldErrors({ ...fieldErrors, [e.target.name]: '' });
   };
 
   const handleCountryChange = (e) => {
@@ -82,18 +90,25 @@ const ProfilePage = () => {
     setFormData({ ...formData, city: e.target.value });
   };
 
+  const validatePasswordFields = () => {
+    const errors = {};
+    if (!passwordData.oldPassword) errors.oldPassword = 'Vui lòng nhập mật khẩu cũ';
+    if (!passwordData.newPassword) errors.newPassword = 'Vui lòng nhập mật khẩu mới';
+    else if (!passwordRegex.test(passwordData.newPassword)) errors.newPassword = 'Mật khẩu mới phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số, 1 ký tự đặc biệt, tối thiểu 8 ký tự';
+    if (!passwordData.confirmPassword) errors.confirmPassword = 'Vui lòng xác nhận mật khẩu mới';
+    else if (passwordData.newPassword !== passwordData.confirmPassword) errors.confirmPassword = 'Xác nhận mật khẩu không khớp';
+    return errors;
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    // Nếu đang đổi mật khẩu
+    setFieldErrors({});
     if (showPasswordFields) {
-      if (!passwordData.oldPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
-        setError('Vui lòng nhập đầy đủ thông tin đổi mật khẩu');
-        return;
-      }
-      if (passwordData.newPassword !== passwordData.confirmPassword) {
-        setError('Mật khẩu mới và xác nhận không khớp');
+      const errors = validatePasswordFields();
+      if (Object.keys(errors).length > 0) {
+        setFieldErrors(errors);
         return;
       }
       // Kiểm tra mật khẩu cũ
@@ -106,7 +121,7 @@ const ProfilePage = () => {
         currentPassword = found ? found.password : '';
       }
       if (passwordData.oldPassword !== currentPassword) {
-        setError('Mật khẩu cũ không đúng');
+        setFieldErrors({ oldPassword: 'Mật khẩu cũ không đúng' });
         return;
       }
       // Cập nhật mật khẩu mới
@@ -141,6 +156,7 @@ const ProfilePage = () => {
     setSuccess('');
     setShowPasswordFields(false);
     setPasswordData({ oldPassword: '', newPassword: '', confirmPassword: '' });
+    setFieldErrors({});
   };
 
   // Pagination logic
@@ -243,22 +259,42 @@ const ProfilePage = () => {
                   <label className="block mb-1 font-medium w-full md:w-32">Password</label>
                   <div className="flex w-full md:w-auto">
                     <input type="password" value={"***************"} disabled className="flex-1 border rounded px-3 py-2 bg-gray-100" />
-                    <button type="button" className="ml-0 md:ml-2 mt-2 md:mt-0 px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 font-semibold w-full md:w-auto" onClick={() => setShowPasswordFields(!showPasswordFields)}>EDIT</button>
+                    <button type="button" className="ml-0 md:ml-2 mt-2 md:mt-0 px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 font-semibold w-full md:w-auto" 
+                      onClick={() => {
+                        setShowPasswordFields(!showPasswordFields);
+                        if (!showPasswordFields) {
+                          setPasswordData({ oldPassword: '', newPassword: '', confirmPassword: '' });
+                          setFieldErrors({});
+                        }
+                      }}
+                    >EDIT</button>
                   </div>
                 </div>
                 {showPasswordFields && (
                   <>
                     <div>
                       <label className="block mb-1 font-medium">Nhập lại mật khẩu cũ</label>
-                      <input type="password" name="oldPassword" value={passwordData.oldPassword} onChange={handlePasswordChange} className="w-full border rounded px-3 py-2" />
+                      <div className="relative">
+                        <input type={showPassword.old ? 'text' : 'password'} name="oldPassword" value={passwordData.oldPassword} onChange={handlePasswordChange} className="w-full border rounded px-3 py-2 pr-10" autoComplete="current-password" />
+                        <button type="button" className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500" tabIndex={-1} onClick={() => setShowPassword(s => ({ ...s, old: !s.old }))}>{showPassword.old ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                      </div>
+                      {fieldErrors.oldPassword && <div className="text-red-500 text-sm mt-1">{fieldErrors.oldPassword}</div>}
                     </div>
                     <div>
                       <label className="block mb-1 font-medium">Mật khẩu mới</label>
-                      <input type="password" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} className="w-full border rounded px-3 py-2" />
+                      <div className="relative">
+                        <input type={showPassword.new ? 'text' : 'password'} name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} className="w-full border rounded px-3 py-2 pr-10" autoComplete="new-password" />
+                        <button type="button" className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500" tabIndex={-1} onClick={() => setShowPassword(s => ({ ...s, new: !s.new }))}>{showPassword.new ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                      </div>
+                      {fieldErrors.newPassword && <div className="text-red-500 text-sm mt-1">{fieldErrors.newPassword}</div>}
                     </div>
                     <div>
                       <label className="block mb-1 font-medium">Xác nhận mật khẩu mới</label>
-                      <input type="password" name="confirmPassword" value={passwordData.confirmPassword} onChange={handlePasswordChange} className="w-full border rounded px-3 py-2" />
+                      <div className="relative">
+                        <input type={showPassword.confirm ? 'text' : 'password'} name="confirmPassword" value={passwordData.confirmPassword} onChange={handlePasswordChange} className="w-full border rounded px-3 py-2 pr-10" autoComplete="new-password" />
+                        <button type="button" className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500" tabIndex={-1} onClick={() => setShowPassword(s => ({ ...s, confirm: !s.confirm }))}>{showPassword.confirm ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                      </div>
+                      {fieldErrors.confirmPassword && <div className="text-red-500 text-sm mt-1">{fieldErrors.confirmPassword}</div>}
                     </div>
                   </>
                 )}
