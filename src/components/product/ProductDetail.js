@@ -213,7 +213,7 @@ const ProductDetail = ({ product }) => {
           {/* Màu sắc */}
           {colors.length > 0 && (
             <div className="mb-2">
-              <span>Colour: {selectedColor}</span>
+              <span>MÀU SẮC: {selectedColor}</span>
               <div className="flex space-x-2 mt-2">
                 {colors.map((color, idx) => (
                   <button
@@ -270,7 +270,7 @@ const ProductDetail = ({ product }) => {
               className="flex items-center justify-between cursor-pointer select-none border-t border-black pt-2 mt-2"
               onClick={() => setDescOpen(v => !v)}
             >
-              <span className="font-bold text-base">DESCRIPTION</span>
+              <span className="font-bold text-base">MÔ TẢ </span>
               <span className="text-gray-600 transition-transform duration-200">
                 {descOpen ? <ChevronUp size={20}/> : <ChevronDown size={20}/>}
               </span>
