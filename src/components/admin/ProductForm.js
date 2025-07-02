@@ -155,6 +155,10 @@ const ProductForm = ({ product, onClose }) => {
       setError('Vui lòng cung cấp đủ 4 hình ảnh');
       return;
     }
+    if (Number(formData.price) < 0 || Number(formData.originalPrice) < 0) {
+      setError('Giá bán và giá gốc phải lớn hơn hoặc bằng 0');
+      return;
+    }
     try {
       const productData = {
         ...formData,

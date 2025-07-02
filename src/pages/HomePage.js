@@ -123,9 +123,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
       {/* Banner Slider */}
-      <section className="relative rounded-2xl overflow-hidden mb-12 h-[320px] md:h-[400px]">
+      <section className="relative rounded-2xl overflow-hidden mb-8 sm:mb-12 h-[180px] xs:h-[240px] md:h-[400px]">
         {bannerImages.map((img, idx) => (
           <div
             key={idx}
@@ -134,12 +134,12 @@ const HomePage = () => {
             aria-hidden={idx !== currentSlide}
           >
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <div className="text-center text-white px-2 md:px-0">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">{img.title}</h1>
-                <p className="text-lg mb-6 drop-shadow">{img.desc}</p>
+              <div className="text-center text-white px-1 xs:px-2 md:px-0">
+                <h1 className="text-lg xs:text-2xl md:text-5xl font-bold mb-2 xs:mb-4 drop-shadow-lg">{img.title}</h1>
+                <p className="text-xs xs:text-base mb-3 xs:mb-6 drop-shadow">{img.desc}</p>
                 <Link
                   to="/shop"
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+                  className="bg-blue-600 text-white px-4 xs:px-6 py-2 xs:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg text-xs xs:text-base"
                 >
                   Mua Sắm Ngay
                 </Link>
@@ -148,40 +148,40 @@ const HomePage = () => {
           </div>
         ))}
         {/* Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-3 xs:bottom-6 left-1/2 -translate-x-1/2 flex gap-1 xs:gap-2 z-20">
           {bannerImages.map((_, idx) => (
             <button
               key={idx}
-              className={`w-3 h-3 rounded-full border-2 ${idx === currentSlide ? 'bg-white border-blue-600' : 'bg-gray-300 border-white'} transition-all`}
+              className={`w-2 xs:w-3 h-2 xs:h-3 rounded-full border-2 ${idx === currentSlide ? 'bg-white border-blue-600' : 'bg-gray-300 border-white'} transition-all`}
               onClick={() => goToSlide(idx)}
               aria-label={`Chuyển đến banner ${idx+1}`}
             />
           ))}
         </div>
         {/* Prev/Next buttons */}
-        <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-30 hover:bg-opacity-60 text-white p-2 rounded-full z-20 hidden md:block"><ChevronLeft size={28}/></button>
-        <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-30 hover:bg-opacity-60 text-white p-2 rounded-full z-20 hidden md:block"><ChevronRight size={28}/></button>
+        <button onClick={prevSlide} className="absolute left-2 xs:left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-30 hover:bg-opacity-60 text-white p-1 xs:p-2 rounded-full z-20 hidden md:block"><ChevronLeft size={28}/></button>
+        <button onClick={nextSlide} className="absolute right-2 xs:right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-30 hover:bg-opacity-60 text-white p-1 xs:p-2 rounded-full z-20 hidden md:block"><ChevronRight size={28}/></button>
       </section>
 
-      {/* Banner/Promotion Section (giữa Banner và New Arrivals) */}
-      <section data-aos="fade-up" className="flex flex-col md:flex-row items-center justify-between bg-blue-50 rounded-2xl p-8 mb-12 mt-8 gap-8">
+      {/* Banner/Promotion Section */}
+      <section data-aos="fade-up" className="flex flex-col md:flex-row items-center justify-between bg-blue-50 rounded-2xl p-4 sm:p-8 mb-8 sm:mb-12 mt-4 sm:mt-8 gap-4 sm:gap-8">
         <div className="flex-1 text-center md:text-left">
-          <div className="uppercase text-xs text-blue-700 font-semibold mb-2 tracking-widest">Ưu đãi lớn</div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Tiết kiệm đến <span className="text-blue-600">50%</span> cho mọi đơn hàng!</h2>
-          <p className="text-gray-700 mb-6 max-w-md">Khám phá các sản phẩm thời trang mới nhất với giá cực tốt. Đừng bỏ lỡ cơ hội sở hữu những item hot trend với mức giá ưu đãi chỉ có tại ClothingStore.</p>
-          <Link to="/shop?sale=true" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow">Mua ngay</Link>
+          <div className="uppercase text-[10px] xs:text-xs text-blue-700 font-semibold mb-1 xs:mb-2 tracking-widest">Ưu đãi lớn</div>
+          <h2 className="text-xl xs:text-3xl md:text-4xl font-bold mb-2 xs:mb-4">Tiết kiệm <span className="text-blue-600">50%</span> cho mọi đơn hàng!</h2>
+          <p className="text-gray-700 mb-3 xs:mb-6 max-w-md text-xs xs:text-base">Khám phá các sản phẩm thời trang mới nhất với giá cực tốt. Đừng bỏ lỡ cơ hội sở hữu những item hot trend với mức giá ưu đãi chỉ có tại ClothingStore.</p>
+          <Link to="/shop?sale=true" className="inline-block bg-blue-600 text-white px-4 xs:px-6 py-2 xs:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow text-xs xs:text-base">Mua ngay</Link>
         </div>
-        <div className="flex-1 flex justify-center items-center relative min-h-[260px]">
-          <div className="relative w-56 h-64">
+        <div className="flex-1 flex justify-center items-center relative min-h-[120px] xs:min-h-[180px] md:min-h-[260px]">
+          <div className="relative w-32 xs:w-44 h-40 xs:h-56 md:w-56 md:h-64">
             <img
               src="https://www.thedoublef.com/cdn-cgi/image/quality=75/media/catalog/category/off_white_thedoublef_uomo_mob_7.jpg"
               alt="Promotion1"
-              className="rounded-xl shadow-lg w-44 h-56 object-cover absolute left-0 top-0 z-10 border-4 border-white"
+              className="rounded-xl shadow-lg w-24 xs:w-36 h-32 xs:h-44 object-cover absolute left-0 top-0 z-10 border-4 border-white"
             />
             <img
               src="https://static.nike.com/a/images/f_auto,cs_srgb/w_1920,c_limit/32e16830-6a41-428b-81e5-064147aa0eb0/the-teenage-creatives-changing-music-and-modeling.jpg"
               alt="Promotion2"
-              className="rounded-xl shadow-lg w-40 h-52 object-cover absolute left-40 top-8 z-0 border-4 border-white"
+              className="rounded-xl shadow-lg w-20 xs:w-32 h-28 xs:h-40 object-cover absolute left-20 xs:left-32 top-6 xs:top-8 z-0 border-4 border-white"
             />
           </div>
         </div>

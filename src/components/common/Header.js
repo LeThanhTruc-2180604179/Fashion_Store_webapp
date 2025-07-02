@@ -153,22 +153,22 @@ const Header = () => {
       )}
 
       {/* Main header */}
-      <div className="w-full px-4 py-4">
-        <div className="flex items-center justify-between w-full">
+      <div className="w-full px-2 sm:px-4 py-3 sm:py-4">
+        <div className="flex items-center justify-between w-full gap-2">
           {/* Hamburger menu - Mobile */}
-          <button className="block md:hidden mr-2" onClick={() => setDrawerOpen(true)}>
+          <button className="block md:hidden mr-2" onClick={() => setDrawerOpen(true)} aria-label="Mở menu">
             <Menu size={28} />
           </button>
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2 min-w-[40px]">
             <div className="bg-blue-600 text-white p-2 rounded-lg">
-              <span className="font-bold text-xl">CS</span>
+              <span className="font-bold text-lg sm:text-xl">CS</span>
             </div>
-            <span className="font-bold text-xl text-gray-800">ClothingStore</span>
+            <span className="font-bold text-base sm:text-xl text-gray-800 hidden xs:inline">ClothingStore</span>
           </Link>
 
           {/* Search bar - Desktop */}
-          <div className="hidden md:block flex-1 max-w-xl mx-8 relative">
+          <div className="hidden md:block flex-1 max-w-xl mx-4 sm:mx-8 relative">
             <form onSubmit={handleSearchSubmit} className="relative">
               <input
                 type="text"
@@ -208,9 +208,51 @@ const Header = () => {
               )}
             </form>
           </div>
+          {/* Search bar - Mobile */}
+          <div className="flex-1 md:hidden max-w-[160px] xs:max-w-[220px] mx-2">
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                type="text"
+                placeholder="Tìm kiếm..."
+                value={searchQuery}
+                onChange={(e) => {
+                  handleSearch(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+                className="w-full px-3 py-1.5 pr-8 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                aria-label="Tìm kiếm"
+              >
+                <Search size={18} />
+              </button>
+              {/* Gợi ý sản phẩm mobile */}
+              {showSuggestions && filteredSuggestions.length > 0 && (
+                <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto text-xs">
+                  {filteredSuggestions.map((p) => (
+                    <div
+                      key={p.id}
+                      className="flex items-center px-2 py-1 cursor-pointer hover:bg-blue-50"
+                      onMouseDown={() => handleSuggestionClick(p.id)}
+                    >
+                      <img src={p.images[0]} alt={p.name} className="w-7 h-7 object-cover rounded mr-2" />
+                      <div>
+                        <div className="font-semibold text-xs line-clamp-1">{p.name}</div>
+                        <div className="text-[10px] text-gray-500 line-clamp-1">{p.brand}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </form>
+          </div>
 
           {/* Danh mục sản phẩm dạng bar xổ ngang dưới header */}
-          <nav className="hidden md:flex items-center space-x-8 mx-auto">
+          <nav className="hidden md:flex items-center space-x-4 lg:space-x-8 mx-auto text-sm lg:text-base">
             {mainCategories.map((cat) => (
               <div key={cat.id} className="relative group">
                 <Link
@@ -243,7 +285,7 @@ const Header = () => {
           </nav>
 
           {/* User actions - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
             <button
               className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
               onClick={() => setDarkMode((v) => !v)}
@@ -356,21 +398,39 @@ const Header = () => {
           </div>
 
           {/* User actions - Mobile */}
-          <div className="flex md:hidden items-center space-x-2">
+          <div className="flex md:hidden items-center space-x-1 xs:space-x-2">
             <Link to="/notifications" className="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
-              <Bell size={24} />
+              <Bell size={20} />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                   {unreadCount}
                 </span>
               )}
             </Link>
+            {/* Wishlist chỉ hiện khi user đã đăng nhập và không phải admin */}
+            {user && !isAdmin && (
+              <Link to="/wishlist" className="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                <Heart size={20} />
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                    {wishlistItems.length}
+                  </span>
+                )}
+              </Link>
+            )}
             <Link to="/cart" className="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
-              <ShoppingCart size={24} />
+              <ShoppingCart size={20} />
             </Link>
-            <Link to="/profile" className="p-2 text-gray-600 hover:text-blue-600 transition-colors">
-              <User size={24} />
-            </Link>
+            {user ? (
+              <Link to="/profile" className="p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                <User size={20} />
+              </Link>
+            ) : (
+              <Link to="/login" className="flex items-center px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs font-semibold">
+                <User size={16} className="mr-1" />
+                Đăng nhập
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -379,15 +439,15 @@ const Header = () => {
       {drawerOpen && (
         <>
           <div className="fixed inset-0 bg-black bg-opacity-40 z-50" onClick={() => { setDrawerOpen(false); setSelectedMainCategory(null); }}></div>
-          <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 flex flex-col p-6 animate-slideIn">
-            <button className="self-end mb-4" onClick={() => { setDrawerOpen(false); setSelectedMainCategory(null); }}><X size={28} /></button>
+          <div className="fixed top-0 left-0 h-full w-4/5 max-w-xs bg-white shadow-lg z-50 flex flex-col p-4 animate-slideIn">
+            <button className="self-end mb-2" onClick={() => { setDrawerOpen(false); setSelectedMainCategory(null); }}><X size={24} /></button>
             {/* Nếu chưa chọn main category thì hiển thị danh sách main */}
             {!selectedMainCategory ? (
-              <nav className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-2">
                 {mainCategories.map((cat) => (
                   <button
                     key={cat.id}
-                    className="px-2 py-2 font-semibold text-left text-gray-800 hover:text-blue-600 border-b border-gray-100"
+                    className="px-2 py-2 font-semibold text-left text-gray-800 hover:text-blue-600 border-b border-gray-100 text-sm"
                     onClick={() => {
                       if (cat.subcategories && cat.subcategories.length > 0 && cat.id !== 'ALL') {
                         setSelectedMainCategory(cat);
@@ -403,13 +463,13 @@ const Header = () => {
               </nav>
             ) : (
               <>
-                <button className="mb-2 text-blue-600 text-sm text-left" onClick={() => setSelectedMainCategory(null)}>&lt; Quay lại</button>
-                <div className="font-bold mb-2 text-lg">{selectedMainCategory.name}</div>
-                <nav className="flex flex-col gap-3">
+                <button className="mb-2 text-blue-600 text-xs text-left" onClick={() => setSelectedMainCategory(null)}>&lt; Quay lại</button>
+                <div className="font-bold mb-2 text-base">{selectedMainCategory.name}</div>
+                <nav className="flex flex-col gap-2">
                   {selectedMainCategory.subcategories.map((sub) => (
                     <button
                       key={sub.id}
-                      className="flex items-center gap-2 px-2 py-2 text-gray-800 hover:text-blue-600 border-b border-gray-100 text-left"
+                      className="flex items-center gap-2 px-2 py-2 text-gray-800 hover:text-blue-600 border-b border-gray-100 text-left text-xs"
                       onClick={() => {
                         setDrawerOpen(false);
                         setSelectedMainCategory(null);
@@ -417,7 +477,7 @@ const Header = () => {
                       }}
                     >
                       {categoryLogos[sub.id] && (
-                        <img src={categoryLogos[sub.id]} alt={sub.name} className="w-6 h-6 object-contain" />
+                        <img src={categoryLogos[sub.id]} alt={sub.name} className="w-5 h-5 object-contain" />
                       )}
                       <span>{sub.name}</span>
                     </button>

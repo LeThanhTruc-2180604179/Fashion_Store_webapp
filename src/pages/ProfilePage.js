@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle, Lock, Eye, EyeOff } from 'lucide-react';
+import { CheckCircle, Lock, Eye, EyeOff, User, Package, Tag, LogOut } from 'lucide-react';
 import DiscountCodesPage from './DiscountCodesPage';
 
 const ProfilePage = () => {
@@ -165,40 +165,50 @@ const ProfilePage = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
-      {/* Sidebar */}
-      <div className="w-full md:w-64 flex flex-col bg-gray-50 py-4 md:py-10 px-2 md:px-6 border-b md:border-b-0 flex-shrink-0 items-center md:items-start rounded-xl shadow-md md:ml-4 md:mt-8">
+      {/* Tab icon nav: chỉ hiện trên mobile */}
+      <div className="w-full md:hidden flex justify-between items-center mb-4 px-2 bg-gray-50 rounded-b-xl shadow-md">
+        <button onClick={() => setActiveTab('profile')} className={`flex-1 flex flex-col items-center py-2 ${activeTab === 'profile' ? 'text-blue-600' : 'text-gray-500'}`} aria-label="Edit Profile">
+          <User size={22} />
+        </button>
+        <button onClick={() => setActiveTab('orders')} className={`flex-1 flex flex-col items-center py-2 ${activeTab === 'orders' ? 'text-blue-600' : 'text-gray-500'}`} aria-label="Lịch sử mua hàng">
+          <Package size={22} />
+        </button>
+        <button onClick={() => setActiveTab('discounts')} className={`flex-1 flex flex-col items-center py-2 ${activeTab === 'discounts' ? 'text-blue-600' : 'text-gray-500'}`} aria-label="Mã giảm giá">
+          <Tag size={22} />
+        </button>
+        <button onClick={() => { if(window.confirm('Bạn có chắc muốn đăng xuất?')) { navigate('/'); window.localStorage.removeItem('user'); window.location.reload(); } }} className="flex-1 flex flex-col items-center py-2 text-red-500" aria-label="Đăng xuất">
+          <LogOut size={22} />
+        </button>
+      </div>
+      {/* Tab nav: vertical on desktop */}
+      <div className="hidden md:flex w-full md:w-64 flex-col bg-gray-50 py-4 md:py-10 px-2 md:px-6 border-b md:border-b-0 flex-shrink-0 items-center md:items-start rounded-xl shadow-md md:ml-4 md:mt-8">
         <button className="mb-2 md:mb-8 text-blue-600 font-semibold text-left w-auto md:w-full self-start md:self-auto" onClick={() => navigate(-1)}>&lt; Back</button>
-        {/* Sidebar nav buttons */}
-        <div className="flex flex-row md:flex-col w-full justify-center md:justify-start gap-2 md:gap-3 mb-2">
+        <div className="w-full flex-col gap-3 mb-2">
           <button
-            className={`flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border transition-all duration-150 ${activeTab === 'profile' ? 'text-blue-600 bg-blue-50 border-blue-600 shadow' : 'text-gray-700 hover:bg-blue-100 hover:text-blue-700 border-transparent'}`}
+            className={`flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border transition-all duration-150 w-full ${activeTab === 'profile' ? 'text-blue-600 bg-blue-50 border-blue-600 shadow' : 'text-gray-700 hover:bg-blue-100 hover:text-blue-700 border-transparent'}`}
             onClick={() => setActiveTab('profile')}
           >
-          
-            Edit Profile
+            <User size={20} /> Edit Profile
           </button>
           <button
-            className={`flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border transition-all duration-150 ${activeTab === 'orders' ? 'text-blue-600 bg-blue-50 border-blue-600 shadow' : 'text-gray-700 hover:bg-blue-100 hover:text-blue-700 border-transparent'}`}
+            className={`flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border transition-all duration-150 w-full ${activeTab === 'orders' ? 'text-blue-600 bg-blue-50 border-blue-600 shadow' : 'text-gray-700 hover:bg-blue-100 hover:text-blue-700 border-transparent'}`}
             onClick={() => setActiveTab('orders')}
           >
-         
-            Lịch sử mua hàng
+            <Package size={20} /> Lịch sử mua hàng
           </button>
           <button
-            className={`flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border transition-all duration-150 ${activeTab === 'discounts' ? 'text-blue-600 bg-blue-50 border-blue-600 shadow' : 'text-gray-700 hover:bg-blue-100 hover:text-blue-700 border-transparent'}`}
+            className={`flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border transition-all duration-150 w-full ${activeTab === 'discounts' ? 'text-blue-600 bg-blue-50 border-blue-600 shadow' : 'text-gray-700 hover:bg-blue-100 hover:text-blue-700 border-transparent'}`}
             onClick={() => setActiveTab('discounts')}
           >
-            
-            Mã giảm giá
+            <Tag size={20} /> Mã giảm giá
+          </button>
+          <button
+            className="flex items-center gap-2 font-semibold text-center px-4 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 transition-all duration-150 w-full"
+            onClick={() => { if(window.confirm('Bạn có chắc muốn đăng xuất?')) { navigate('/'); window.localStorage.removeItem('user'); window.location.reload(); } }}
+          >
+            <LogOut size={20} /> Đăng xuất
           </button>
         </div>
-        {/* Nút đăng xuất chỉ hiển thị trên mobile */}
-        <button
-          className="mt-2 md:mt-auto px-4 py-2 border border-red-500 text-red-600 rounded hover:bg-red-50 font-semibold w-full md:hidden"
-          onClick={() => { if(window.confirm('Bạn có chắc muốn đăng xuất?')) { navigate('/'); window.localStorage.removeItem('user'); window.location.reload(); } }}
-        >
-          Đăng xuất
-        </button>
       </div>
       {/* Main content */}
       <div className="flex-1 flex flex-col px-2 md:px-0 pt-4 md:pt-8 w-full max-w-5xl mx-auto">

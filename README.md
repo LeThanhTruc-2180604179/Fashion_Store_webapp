@@ -79,6 +79,7 @@ Truy cập: http://localhost:3000
 
 #### Mã giảm giá (/discount-codes)
 - Xem danh sách mã giảm giá, trạng thái (còn hiệu lực, đã dùng, hết hạn).
+- KHI MUA ĐƠN HÀNG CÓ GIÁ TRỊ TRÊN 20.000.000VND LẦN ĐẦU TIÊN SẼ ĐƯỢC TẶNG 1 MÃ GIẢM GIÁ, MÃ NÀY CHỈ TẶNG 1 LẦN DUY NHẤT KHÔNG ÁP  DỤNG VỚI ĐƠN HÀNG TRÊN 20.000.000 TIẾP THEO.   
 
 #### Chat hỗ trợ khách hàng (nút Chat góc phải)
 - Gửi yêu cầu kiểm tra đơn hàng, chat với admin.

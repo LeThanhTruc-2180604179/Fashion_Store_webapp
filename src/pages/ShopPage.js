@@ -61,12 +61,12 @@ const ShopPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-2 md:px-4 py-8">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6">
+    <div className="container mx-auto px-2 md:px-4 py-4 md:py-8">
+      <h2 className="text-xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">
         {category ? `Sản Phẩm: ${category}` : 'Tất Cả Sản Phẩm'}
       </h2>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-        <div className="lg:col-span-1 w-full md:w-auto hidden md:block">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-8 items-start">
+        <div className="lg:col-span-1 w-full md:w-auto hidden lg:block">
           <ProductFilter />
         </div>
         <div className="lg:col-span-3 w-full md:w-auto">
@@ -76,14 +76,13 @@ const ShopPage = () => {
             showSaleBadge={isSale}
             showNewBadge={sort === 'newest'}
           />
-          {/* Phân trang */}
           {totalPages > 1 && (
-            <div className="flex justify-center mt-8 space-x-2">
+            <div className="flex flex-wrap justify-center mt-6 md:mt-8 space-x-1 md:space-x-2">
               {Array.from({ length: totalPages }, (_, i) => (
                 <button
                   key={i + 1}
                   onClick={() => setPage(i + 1)}
-                  className={`px-3 py-1 rounded-lg font-semibold border ${page === i + 1 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-blue-50'}`}
+                  className={`px-2 md:px-3 py-1 rounded-lg font-semibold border text-xs md:text-base ${page === i + 1 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-blue-50'}`}
                 >
                   {i + 1}
                 </button>
@@ -92,7 +91,6 @@ const ShopPage = () => {
           )}
         </div>
       </div>
-      {/* Sidebar mobile ẩn đi, chỉ dùng filter phía trên */}
     </div>
   );
 };
